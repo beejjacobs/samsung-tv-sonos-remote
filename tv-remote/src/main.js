@@ -4,7 +4,12 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
-new Vue({
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
+function onDeviceReady() {
+  console.log('onDeviceReady');
+  new Vue({
+    vuetify,
+    render: h => h(App)
+  }).$mount('#app')
+}
+
+document.addEventListener('deviceready', onDeviceReady);
