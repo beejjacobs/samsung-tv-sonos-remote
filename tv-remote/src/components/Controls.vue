@@ -111,6 +111,9 @@ export default {
     }
   },
   async mounted() {
+    const onResume = () => {
+     this.tryGet();
+    };
     const onVolumeUpKeyDown = () => {
       this.volumeUp();
     };
@@ -118,24 +121,27 @@ export default {
     const onVolumeDownKeyDown = () => {
       this.volumeDown()
     };
-
+    document.addEventListener("resume", onResume, false);
     document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
     document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
 
-    try {
-      await this.getVolume();
-    } catch (e) {
-      await this.getVolume();
-    }
-    try {
-      await this.getMute();
-    } catch (e) {
-      await this.getMute();
-    }
+
   },
   methods: {
     press(method, param) {
       samsungTv[method](param);
+    },
+    async tryGet() {
+      try {
+        await this.getVolume();
+      } catch (e) {
+        await this.getVolume();
+      }
+      try {
+        await this.getMute();
+      } catch (e) {
+        await this.getMute();
+      }
     },
     async getVolume() {
       this.volume = await speaker.getVolume();
