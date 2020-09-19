@@ -111,6 +111,17 @@ export default {
     }
   },
   async mounted() {
+    const onVolumeUpKeyDown = () => {
+      this.volumeUp();
+    };
+
+    const onVolumeDownKeyDown = () => {
+      this.volumeDown()
+    };
+
+    document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
+    document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
+
     try {
       await this.getVolume();
     } catch (e) {
