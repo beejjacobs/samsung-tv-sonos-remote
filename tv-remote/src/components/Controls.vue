@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import samsungTv from '@/tv';
+import samsungTv from '@/api/tv';
 import TouchPad from '@/components/TouchPad';
 
 export default {

@@ -20,7 +20,7 @@
 
 <script>
 import Hammer from 'hammerjs';
-import samsungTv from '@/tv';
+import samsungTv from '@/api/tv';
 
 export default {
   name: 'TouchPad',

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Samsung Remote class
  */
