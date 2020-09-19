@@ -1,4 +1,8 @@
-cordova.plugin.http.setDataSerializer('utf8');
+function onDeviceReady() {
+  cordova.plugin.http.setDataSerializer('utf8');
+}
+
+document.addEventListener('deviceready', onDeviceReady);
 
 export class Sonos {
   constructor({ip}) {
