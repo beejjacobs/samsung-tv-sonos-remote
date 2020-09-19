@@ -67,6 +67,17 @@
 
       <touch-pad/>
     </div>
+
+    <div id="transport">
+      <v-btn v-for="transport in transports"
+             :key="transport.icon"
+             fab
+             small
+             color="deep-purple"
+             @click="press('transport', transport.param)">
+        <v-icon>mdi-{{ transport.icon }}</v-icon>
+      </v-btn>
+    </div>
   </div>
 </template>
 
@@ -89,13 +100,13 @@ export default {
         {img: 'channel4hd.png', number: '104'}
       ],
       transports: [
-        {icon: 'skip_previous', param: 'skip-backward'},
-        {icon: 'fast_rewind', param: 'backward'},
-        {icon: 'play_arrow', param: 'play'},
+        {icon: 'skip-previous', param: 'skip-backward'},
+        {icon: 'rewind', param: 'backward'},
+        {icon: 'play', param: 'play'},
         {icon: 'pause', param: 'pause'},
         {icon: 'stop', param: 'stop'},
-        {icon: 'fast_forward', param: 'forward'},
-        {icon: 'skip_next', param: 'skip-forward'}
+        {icon: 'fast-forward', param: 'forward'},
+        {icon: 'skip-next', param: 'skip-forward'}
       ],
       volume: 0,
       muted: false
@@ -191,6 +202,7 @@ export default {
 #dpad {
   display: grid;
   grid-template-columns: repeat(3, 16vw);
+  grid-template-rows: repeat(4, 1fr);
 }
 
 #keypad *:last-child,
@@ -213,12 +225,9 @@ export default {
 }
 #transport {
   grid-row: 10;
-}
-
-@media (max-width: 480px) {
-  #transport .md-button.md-icon-button {
-    margin: 0;
-  }
+  width: 90%;
+  justify-content: space-around;
+  display: flex;
 }
 
 #keypad {
@@ -286,13 +295,10 @@ export default {
 }
 
 .key.v-btn:not(.v-btn--round).v-size--default {
-  min-width: unset;
-  width: unset;
-  height: unset;
   font-size: 2em;
-  margin: 4px;
 }
 
+.key.v-btn:not(.v-btn--round).v-size--default,
 #dpad .v-btn:not(.v-btn--round).v-size--default {
   min-width: unset;
   width: unset;
