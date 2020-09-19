@@ -91,8 +91,6 @@ export default {
   components: {TouchPad},
   data() {
     return {
-      swipeView: false,
-      swiping: false,
       channels: [
         {img: 'bbconehd.png', number: '101'},
         {img: 'bbctwohd.png', number: '102'},
@@ -110,21 +108,6 @@ export default {
       ],
       volume: 0,
       muted: false
-    }
-  },
-  computed: {
-    muteButtonClass() {
-      return this.muted ? this.iconButton + ' red' : this.iconButton;
-    },
-    sliderStyle() {
-      return {
-        "backgroundColor": "#fff"
-      };
-    },
-    sliderBackground() {
-      return {
-        "backgroundColor": "#808080"
-      };
     }
   },
   async mounted() {

@@ -9,6 +9,7 @@ module.exports = {
     cordovaPath: 'src-cordova'
   },
   devServer: {
-    public: "https://192.168.0.158:8080"
+    https: false,
+    public: "http://192.168.0.158:8080"
   }
 }
