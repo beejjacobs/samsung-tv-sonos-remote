@@ -40,7 +40,7 @@
       </v-btn>
       <img id="smartHub" :src="require('../assets/smarthub.png')" @click="press('smartHub')">
       <div id="slider">
-        <v-slider v-model="volume" @change="setVolume"/>
+        <v-slider color="white" v-model="volume" @change="setVolume"/>
       </div>
     </div>
 
@@ -127,20 +127,24 @@ export default {
       };
     }
   },
-  mounted() {
-    this.getVolume();
-    this.getMute();
+  async mounted() {
+    try {
+      await this.getVolume();
+    } catch (e) {
+      await this.getVolume();
+    }
+    try {
+      await this.getMute();
+    } catch (e) {
+      await this.getMute();
+    }
   },
   methods: {
     press(method, param) {
       samsungTv[method](param);
     },
     async getVolume() {
-      try {
-        this.volume = await speaker.getVolume();
-      } catch (e) {
-        console.error(e);
-      }
+      this.volume = await speaker.getVolume();
     },
     async setVolume(value) {
       try {
@@ -164,11 +168,7 @@ export default {
       }
     },
     async getMute() {
-      try {
-        this.muted = await speaker.getMute();
-      } catch (e) {
-        console.error(e);
-      }
+      this.muted = await speaker.getMute();
     },
     async toggleMute() {
       try {
