@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="open" fullscreen>
     <template #activator="{on}">
-      <v-btn v-on="on" color="accent"><v-icon>mdi-gesture-tap-hold</v-icon></v-btn>
+      <v-btn v-on="on" color="accent" class="activator">
+        <v-icon large>mdi-gesture-tap-hold</v-icon>
+      </v-btn>
     </template>
     <div class="touch" ref="touch" :v-ripple="{ class: 'white--text' }">
       <v-btn fab fixed top right @click="open = false" color="red">
@@ -152,5 +154,13 @@ export default {
 .swipe.right {
   top: calc(50% - 24px);
   right: 24px;
+}
+
+.activator.v-btn:not(.v-btn--round).v-size--default {
+  min-width: unset;
+  width: unset;
+  height: unset;
+  margin: 4px;
+  grid-column: 2;
 }
 </style>

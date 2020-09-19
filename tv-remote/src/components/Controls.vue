@@ -6,6 +6,44 @@
            v-bind:src="require('../assets/' + channel.img)"
            @click="press('setChannel', channel.number)">
     </div>
+
+    <div id="misc">
+      <v-btn id="volumeUp" fab color="primary" @click="volumeUp">
+        <v-icon>mdi-volume-high</v-icon>
+      </v-btn>
+      <v-btn id="volumeDown" fab color="primary" @click="volumeDown">
+        <v-icon>mdi-volume-medium</v-icon>
+      </v-btn>
+      <v-btn id="mute" fab @click="toggleMute" :color="muted ? 'red' : 'primary'">
+        <v-icon>mdi-volume-off</v-icon>
+      </v-btn>
+      <v-btn id="channelUp" fab color="primary" @click="press('channelUp')">
+        <v-icon>mdi-plus</v-icon>
+      </v-btn>
+      <v-btn id="channelDown" fab color="primary" @click="press('channelDown')">
+        <v-icon>mdi-minus</v-icon>
+      </v-btn>
+      <v-btn id="hdmi" fab color="primary" @click="press('hdmi')">
+        <v-icon>mdi-video-input-hdmi</v-icon>
+      </v-btn>
+      <v-btn id="tv" fab color="primary" @click="press('tv')">
+        <v-icon>mdi-television</v-icon>
+      </v-btn>
+      <v-btn id="info" fab color="primary" @click="press('info')">
+        <v-icon>mdi-information-outline</v-icon>
+      </v-btn>
+      <v-btn id="tools" fab color="primary" @click="press('tools')">
+        <v-icon>mdi-wrench</v-icon>
+      </v-btn>
+      <v-btn id="menu" fab color="primary" @click="press('menu')">
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
+      <img id="smartHub" :src="require('../assets/smarthub.png')" @click="press('smartHub')">
+      <div id="slider">
+        <v-slider v-model="volume" @change="setVolume"/>
+      </div>
+    </div>
+
     <div id="keypad">
       <v-btn v-for="key in [1,2,3,4,5,6,7,8,9,0]"
              :key="key"
@@ -17,31 +55,25 @@
     </div>
 
     <div id="dpad">
-      <v-btn color="accent" @click="press('source')">Src</v-btn>
+      <v-btn color="primary" @click="press('source')">Src</v-btn>
       <v-btn color="accent" @click="press('arrow', 'up')"><v-icon>mdi-arrow-up</v-icon></v-btn>
-      <v-btn color="accent" @click="press('guide')">Guide</v-btn>
+      <v-btn color="primary" @click="press('guide')">Guide</v-btn>
       <v-btn color="accent" @click="press('arrow', 'left')"><v-icon>mdi-arrow-left</v-icon></v-btn>
       <v-btn color="accent" @click="press('enter')"><v-icon>mdi-stop</v-icon></v-btn>
       <v-btn color="accent" @click="press('arrow', 'right')"><v-icon>mdi-arrow-right</v-icon></v-btn>
-      <v-btn color="accent" @click="press('back')">Back</v-btn>
+      <v-btn color="primary" @click="press('back')">Back</v-btn>
       <v-btn color="accent" @click="press('arrow', 'down')"><v-icon>mdi-arrow-down</v-icon></v-btn>
-      <v-btn color="accent" @click="press('exit')">Exit</v-btn>
+      <v-btn color="primary" @click="press('exit')">Exit</v-btn>
 
-      <touch-pad :style="{gridColumn: 2}"/>
+      <touch-pad/>
     </div>
-
-
-    <v-btn @click="press('source')">Source</v-btn>
-    <v-btn @click="press('menu')">Menu</v-btn>
-    <v-btn @click="press('back')">Back</v-btn>
-
-    <v-slider v-model="volume"/>
   </div>
 </template>
 
 <script>
 import samsungTv from '@/api/tv';
 import TouchPad from '@/components/TouchPad';
+import speaker from '@/api/speaker';
 
 export default {
   name: 'Controls',
@@ -66,8 +98,7 @@ export default {
         {icon: 'skip_next', param: 'skip-forward'}
       ],
       volume: 0,
-      muted: false,
-      ignoreInput: false
+      muted: false
     }
   },
   computed: {
@@ -85,16 +116,57 @@ export default {
       };
     }
   },
+  mounted() {
+    this.getVolume();
+    this.getMute();
+  },
   methods: {
     press(method, param) {
       samsungTv[method](param);
     },
-    volumeChange(volume) {
-      if (this.ignoreInput) {
-        return;
+    async getVolume() {
+      try {
+        this.volume = await speaker.getVolume();
+      } catch (e) {
+        console.error(e);
       }
-      console.log(volume);
-      // todo: volume control
+    },
+    async setVolume(value) {
+      try {
+        await speaker.setVolume(value);
+      } catch (e) {
+        console.error('setVolume', e);
+      }
+    },
+    async volumeUp() {
+      try {
+        this.volume = await speaker.setVolumeRel(2);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async volumeDown() {
+      try {
+        this.volume = await speaker.setVolumeRel(-2);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async getMute() {
+      try {
+        this.muted = await speaker.getMute();
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    async toggleMute() {
+      try {
+        const muted = await speaker.getMute();
+        await speaker.setMute(!muted);
+        this.muted = await speaker.getMute();
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };
