@@ -38,7 +38,10 @@
       <v-btn id="menu" fab color="primary" @click="press('menu')">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
-      <img id="smartHub" :src="require('../assets/smarthub.png')" @click="press('smartHub')">
+      <v-btn id="smartHub" @click="press('smartHub')" icon>
+        <img :src="require('../assets/smarthub.png')">
+      </v-btn>
+      <h3 id="volume" class="grey--text">{{ volume }}%</h3>
       <div id="slider">
         <v-slider color="white" v-model="volume" @change="setVolume"/>
       </div>
@@ -280,7 +283,11 @@ export default {
 #tools {
   grid-area: 3 / 2;
 }
-#smartHub {
+#volume {
+  grid-area: 3 / 3;
+}
+#smartHub,
+#smartHub img {
   max-width: 60px;
   grid-area: 2 / 3;
 }
