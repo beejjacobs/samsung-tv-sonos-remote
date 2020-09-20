@@ -9,34 +9,34 @@
 
     <div id="misc">
       <v-btn id="volumeUp" fab color="primary" @click="volumeUp">
-        <v-icon>mdi-volume-high</v-icon>
+        <v-icon size="30">mdi-volume-high</v-icon>
       </v-btn>
       <v-btn id="volumeDown" fab color="primary" @click="volumeDown">
-        <v-icon>mdi-volume-medium</v-icon>
+        <v-icon size="30">mdi-volume-medium</v-icon>
       </v-btn>
       <v-btn id="mute" fab @click="toggleMute" :color="muted ? 'red' : 'primary'">
-        <v-icon>mdi-volume-off</v-icon>
+        <v-icon size="30">mdi-volume-off</v-icon>
       </v-btn>
       <v-btn id="channelUp" fab color="primary" @click="press('channelUp')">
-        <v-icon>mdi-plus</v-icon>
+        <v-icon size="30">mdi-plus</v-icon>
       </v-btn>
       <v-btn id="channelDown" fab color="primary" @click="press('channelDown')">
-        <v-icon>mdi-minus</v-icon>
+        <v-icon size="30">mdi-minus</v-icon>
       </v-btn>
       <v-btn id="hdmi" fab color="primary" @click="press('hdmi')">
-        <v-icon>mdi-video-input-hdmi</v-icon>
+        <v-icon size="30">mdi-video-input-hdmi</v-icon>
       </v-btn>
       <v-btn id="tv" fab color="primary" @click="press('tv')">
-        <v-icon>mdi-television</v-icon>
+        <v-icon size="30">mdi-television</v-icon>
       </v-btn>
       <v-btn id="info" fab color="primary" @click="press('info')">
-        <v-icon>mdi-information-outline</v-icon>
+        <v-icon size="30">mdi-information-outline</v-icon>
       </v-btn>
       <v-btn id="tools" fab color="primary" @click="press('tools')">
-        <v-icon>mdi-wrench</v-icon>
+        <v-icon size="30">mdi-wrench</v-icon>
       </v-btn>
       <v-btn id="menu" fab color="primary" @click="press('menu')">
-        <v-icon>mdi-menu</v-icon>
+        <v-icon size="30">mdi-menu</v-icon>
       </v-btn>
       <v-btn id="smartHub" @click="press('smartHub')" icon>
         <img :src="require('../assets/smarthub.png')">
@@ -59,13 +59,13 @@
 
     <div id="dpad">
       <v-btn color="primary" @click="press('source')">Src</v-btn>
-      <v-btn color="accent" @click="press('arrow', 'up')"><v-icon>mdi-arrow-up</v-icon></v-btn>
+      <v-btn color="accent" @click="press('arrow', 'up')"><v-icon size="30">mdi-arrow-up</v-icon></v-btn>
       <v-btn color="primary" @click="press('guide')">Guide</v-btn>
-      <v-btn color="accent" @click="press('arrow', 'left')"><v-icon>mdi-arrow-left</v-icon></v-btn>
-      <v-btn color="accent" @click="press('enter')"><v-icon>mdi-stop</v-icon></v-btn>
-      <v-btn color="accent" @click="press('arrow', 'right')"><v-icon>mdi-arrow-right</v-icon></v-btn>
+      <v-btn color="accent" @click="press('arrow', 'left')"><v-icon size="30">mdi-arrow-left</v-icon></v-btn>
+      <v-btn color="accent" @click="press('enter')"><v-icon size="30">mdi-stop</v-icon></v-btn>
+      <v-btn color="accent" @click="press('arrow', 'right')"><v-icon size="30">mdi-arrow-right</v-icon></v-btn>
       <v-btn color="primary" @click="press('back')">Back</v-btn>
-      <v-btn color="accent" @click="press('arrow', 'down')"><v-icon>mdi-arrow-down</v-icon></v-btn>
+      <v-btn color="accent" @click="press('arrow', 'down')"><v-icon size="30">mdi-arrow-down</v-icon></v-btn>
       <v-btn color="primary" @click="press('exit')">Exit</v-btn>
 
       <touch-pad/>
