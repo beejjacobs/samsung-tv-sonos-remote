@@ -112,7 +112,7 @@ export default {
   },
   async mounted() {
     const onResume = () => {
-     this.tryGet();
+      this.tryGet();
     };
     const onVolumeUpKeyDown = () => {
       this.volumeUp();
@@ -125,7 +125,7 @@ export default {
     document.addEventListener("volumeupbutton", onVolumeUpKeyDown, false);
     document.addEventListener("volumedownbutton", onVolumeDownKeyDown, false);
 
-
+    this.tryGet();
   },
   methods: {
     press(method, param) {
